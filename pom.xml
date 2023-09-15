@@ -53,29 +53,18 @@
       <version>1.16.2</version>
     </dependency>
 
+      <!-- ... other dependencies ... -->
 
-    <!-- Other Dependencies -->
-    <!-- Lombok Dependency -->
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.22</version>      <!-- Use the latest version of Lombok -->
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-core</artifactId>
+      <version>1.16.2</version>
       <scope>provided</scope>
     </dependency>
 
-    <!-- Jackson Dependencies -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.15.2</version>      <!-- Use the version of Jackson you need -->
-    </dependency>
 
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>2.14.3</version>
-    </dependency>
 
+    <!-- Other Dependencies -->
     <!-- Add other dependencies your project may require here -->
 
   </dependencies>
@@ -91,6 +80,45 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>hes.cs63.CEPMonitor.StrokeRiskAlarm</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version> <!-- Use the appropriate version -->
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>hes.cs63.CEPMonitor.StrokeRiskAlarm</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
+
 </project>
